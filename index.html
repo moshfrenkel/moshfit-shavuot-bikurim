@@ -76,21 +76,30 @@
   }
   .gen.teal .roll{background:linear-gradient(135deg,var(--teal),#1fa79f);box-shadow:0 10px 26px #2bbcb333}
   .gen .roll:active{transform:translateY(2px)}
+  .gen .roll:disabled{filter:grayscale(.3) brightness(.92);cursor:default}
   .gen .out{margin-top:14px;min-height:8px}
 
-  /* result: course */
+  /* rolling suspense */
+  .rolling{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 8px}
+  .rolling .die{font-size:50px;display:inline-block;animation:tumble .45s linear infinite}
+  .rolling .rname{font-size:19px;font-weight:700;color:var(--muted);min-height:24px}
+  @keyframes tumble{0%{transform:rotate(0) scale(1)}50%{transform:rotate(180deg) scale(1.18)}100%{transform:rotate(360deg) scale(1)}}
+
+  /* result: course (object only, room for creativity) */
   .course-grid{display:flex;flex-direction:column;gap:9px}
-  .course-grid .ci{display:flex;gap:12px;align-items:center;background:#0e171b;border:1px solid var(--line);border-radius:12px;padding:11px 13px;animation:pop .35s both}
-  .course-grid .ci .em{font-size:26px;flex-shrink:0}
-  .course-grid .ci b{font-weight:700;font-size:16px}
-  .course-grid .ci span{display:block;color:var(--muted);font-size:13px}
-  .course-grid .ci .ord{margin-inline-start:auto;font-family:'Secular One';color:var(--teal);font-size:15px}
+  .course-grid .ci{display:flex;gap:13px;align-items:center;background:#0e171b;border:1px solid var(--line);border-radius:12px;padding:13px 15px;animation:pop .35s both}
+  .course-grid .ci .em{font-size:28px;flex-shrink:0}
+  .course-grid .ci b{font-weight:700;font-size:18px}
+  .course-grid .ci .ord{margin-inline-start:auto;font-family:'Secular One';color:var(--teal);font-size:16px}
+  .course-note{color:var(--muted);font-size:13px;text-align:center;margin-top:10px}
 
   /* result: bikurim */
   .bik{background:#0e171b;border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;animation:pop .4s both}
   .bik .big{font-size:46px;line-height:1}
   .bik .cat{font-family:'Secular One';font-size:22px;margin:6px 0 2px}
-  .bik .arrow{color:var(--muted);font-size:14px;margin:4px 0}
+  .bik .count{font-size:16px;color:var(--text);margin-top:4px}
+  .bik .count b{font-family:'Secular One';color:var(--orange);font-size:26px;padding:0 5px}
+  .bik .arrow{color:var(--muted);font-size:14px;margin:6px 0 2px}
   .bik .bring{font-size:18px;font-weight:700;color:var(--teal)}
   .bik .lvl{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--orange);background:var(--orange-soft);border:1px solid #f4a26133;padding:4px 12px;border-radius:999px}
   .bik .tip{color:var(--muted);font-size:14px;margin-top:10px}
@@ -124,6 +133,8 @@
   .acc.danger{border-color:#f4a26144}
   .acc.danger summary{color:var(--orange)}
   .acc.danger .in li::before{content:"✅";flex-shrink:0}
+  .acc .in p{margin:8px 0}
+  .acc .in p b{color:var(--text)}
   .why{background:linear-gradient(180deg,var(--teal-soft),transparent);border:1px solid #2bbcb333;border-radius:14px;padding:16px;font-size:15px;color:#cfeae7;margin-top:14px}
   .why b{color:var(--teal)}
 
@@ -172,8 +183,8 @@
   <section class="sec">
     <div class="sec-h"><span class="dot"></span><h2>איך משחקים?</h2></div>
     <div class="loop">
-      <div class="step"><span class="n">1</span><div><b>מגרילים מסלול</b><span>לוחצים על מחולל המסלול, ובונים יחד מסלול מהחפצים שיצאו.</span></div></div>
-      <div class="step"><span class="n">2</span><div><b>מגרילים ביכורים</b><span>לוחצים על מחולל הביכורים, והוא אומר מה לשאת היום.</span></div></div>
+      <div class="step"><span class="n">1</span><div><b>מגרילים מסלול</b><span>לוחצים על מחולל המסלול, ובונים מהחפצים שיצאו מסלול, איך שבא לכם. אתם ממציאים מה עושים עם כל חפץ.</span></div></div>
+      <div class="step"><span class="n">2</span><div><b>מגרילים ביכורים</b><span>לוחצים על מחולל הביכורים, והוא אומר מה לשאת היום, וכמה.</span></div></div>
       <div class="step"><span class="n">3</span><div><b>יוצאים למסע</b><span>כל אחד עם "טנא" (מגש או צלחת), מניחים עליו את הביכורים ועוברים את המסלול בלי להפיל.</span></div></div>
       <div class="step"><span class="n">4</span><div><b>מגיעים לפינת האיסוף</b><span>מניחים את הביכורים, ומגרילים סבב חדש עם מסלול וביכורים אחרים.</span></div></div>
     </div>
@@ -194,8 +205,8 @@
     <div class="gen">
       <div class="tag">שלב 2</div>
       <div class="gh">🧺 מחולל הביכורים</div>
-      <div class="gp">לחיצה מכריזה אילו ביכורים נושאים היום, ומה מהבית מחליף אותם.</div>
-      <button class="roll" id="rollBik">🧺 איזה ביכורים?</button>
+      <div class="gp">לחיצה מכריזה אילו ביכורים נושאים היום, כמה, ומה מהבית מחליף אותם.</div>
+      <button class="roll" id="rollBik">🎲 איזה ביכורים?</button>
       <div class="out" id="bikOut"><div class="placeholder">לחצו כדי לקבל ביכורים</div></div>
     </div>
   </section>
@@ -246,8 +257,17 @@
 
   <!-- Why it works -->
   <div class="why">
-    <b>למה זה עובד?</b> נשיאת הביכורים ובניית המסלול הן "עבודה כבדה" שמפעילה את חוש תחושת-הגוף ועוזרת לילד.ה מתפרע.ת לחזור לאיזון. הטנא מוסיף שיווי משקל דינמי, וההגרלה בכל סבב מאלצת את הילד.ה לתכנן מסלול חדש, אז גם הראש עובד, לא רק הגוף.
+    <b>למה זה עובד?</b> נשיאת הביכורים ובניית המסלול הן "עבודה כבדה" שמפעילה את חוש תחושת-הגוף ועוזרת לילד.ה מתפרע.ת לחזור לאיזון. הטנא מוסיף שיווי משקל דינמי, וההגרלה בכל סבב מאלצת את הילד.ה לתכנן מסלול חדש ולספור כמה ביכורים לשאת, אז גם הראש עובד, לא רק הגוף.
   </div>
+
+  <!-- Disclaimer -->
+  <details class="acc" style="margin-top:14px">
+    <summary>📋 אחריות ופרטיות <span class="arw">▾</span></summary>
+    <div class="in">
+      <p><b>אחריות.</b> הפעילות נועדה לכיף ולתנועה משותפת, ומבוצעת באחריות המבוגר.ת המלווה. ודאו סביבה בטוחה, השגיחו על הילדים.ות לאורך כל המשחק, והתאימו את הקושי ליכולת. מושפיט אינה אחראית לנזק שייגרם משימוש בפעילות. זו אינה המלצה רפואית או טיפולית, ובכל ספק בריאותי התייעצו עם איש.ת מקצוע.</p>
+      <p><b>פרטיות.</b> הדף הזה לא אוסף, לא שומר ולא משתף שום מידע אישי. אין הרשמה, אין עוגיות מעקב, והכל רץ במכשיר שלכם.ן בלבד. הגופנים בלבד נטענים משירות Google Fonts.</p>
+    </div>
+  </details>
 
   <!-- Footer -->
   <footer class="foot">
@@ -265,64 +285,96 @@ const $ = s => document.querySelector(s);
 
 /* ===== Data ===== */
 const COURSE = [
-  {em:"🪑", name:"כסא",            act:"לזחול מתחתיו"},
-  {em:"🛋️", name:"ספה",            act:"לטפס ולרדת"},
-  {em:"🧺", name:"סל כביסה",        act:"להקיף סביבו"},
-  {em:"🧣", name:"מגבת או צעיף",    act:"לפסוע מעל ה'נחל'"},
-  {em:"🪢", name:"חגורה או חבל",    act:"קו שיווי משקל ללכת עליו"},
-  {em:"🛏️", name:"ערימת כריות",    act:"'הר' לטפס עליו"},
-  {em:"📦", name:"קופסה",           act:"לעבור מעליה בזהירות"},
-  {em:"🧹", name:"מקל מטאטא",       act:"לעבור מתחת, לימבו"},
-  {em:"🪜", name:"שרפרף",           act:"לעקוף בזהירות"},
-  {em:"🚪", name:"מסגרת דלת",       act:"לעבור דרכה בלי לגעת"}
+  {em:"🧹", name:"מקל מטאטא"},
+  {em:"🛋️", name:"ספה"},
+  {em:"🧣", name:"מגבת"},
+  {em:"🪢", name:"חגורה"},
+  {em:"🪑", name:"כסא"},
+  {em:"🪜", name:"שרפרף"},
+  {em:"🛏️", name:"כרית"},
+  {em:"💧", name:"בקבוק מים"},
+  {em:"⛑️", name:"קסדה"}
 ];
 
 const BIKURIM = [
   {em:"🍎", cat:"פירות עגולים",  bring:"כדורים שונים",            lvl:"מתגלגל · אתגר איזון", tip:"מתגלגלים בקלות, צריך טנא יציב ויד רגועה."},
   {em:"🥕", cat:"ירקות",         bring:"אבני לגו או קוביות",       lvl:"יציב · קל יותר",      tip:"מצוין לפעם הראשונה ולקטנטנים."},
-  {em:"📚", cat:"ספרים",         bring:"שניים-שלושה ספרים",        lvl:"שטוח · בינוני",       tip:"אפשר לערום, נופל אם ממהרים."},
-  {em:"🍇", cat:"אשכול ענבים",   bring:"חופן כדורים קטנים יחד",    lvl:"מתפזר · מאתגר",       tip:"הכל יחד על הטנא, בלי לאבד באמצע."},
+  {em:"📚", cat:"ספרים",         bring:"ספרים",                    lvl:"שטוח · בינוני",       tip:"אפשר לערום, נופל אם ממהרים."},
+  {em:"🍇", cat:"אשכול ענבים",   bring:"כדורים קטנים יחד",         lvl:"מתפזר · מאתגר",       tip:"הכל יחד על הטנא, בלי לאבד באמצע."},
   {em:"🌽", cat:"שיבולים ותירס", bring:"בקבוקים ריקים או מקלות",   lvl:"מתגלגל לרוחב",        tip:"שמים לאורך הטנא כדי שלא יתגלגלו."},
   {em:"🧀", cat:"מאכלי חלב",     bring:"קופסאות או חפצים מרובעים", lvl:"יציב · קל",           tip:"שבועות הוא חג מאכלי החלב, מתאים במיוחד."},
   {em:"🥚", cat:"ביצים",         bring:"כדורי משחק עדינים",        lvl:"עדין · בזהירות",      tip:"נושאים 'בלי לשבור', תנועה רכה ואיטית."}
 ];
 
-/* ===== Generators ===== */
+/* ===== Helpers ===== */
 function pickMany(arr, n){
   const c=[...arr], out=[];
   for(let i=0;i<n && c.length;i++){ out.push(c.splice(Math.floor(Math.random()*c.length),1)[0]); }
   return out;
 }
 
-function rollCourse(){
-  const n = 3 + Math.floor(Math.random()*2); // 3-4
-  const items = pickMany(COURSE, n);
+/* ===== Course generator (with rolling suspense) ===== */
+function renderCourse(items){
   $("#courseOut").innerHTML =
     '<div class="course-grid">' +
     items.map((it,i)=>`
-      <div class="ci" style="animation-delay:${i*70}ms">
+      <div class="ci" style="animation-delay:${i*80}ms">
         <span class="em">${it.em}</span>
-        <div><b>${it.name}</b><span>${it.act}</span></div>
+        <b>${it.name}</b>
         <span class="ord">${i+1}</span>
       </div>`).join("") +
-    '</div>';
+    '</div><div class="course-note">בונים מאלה מסלול, איך שבא לכם. אין כללים קבועים.</div>';
 }
 
+let courseRolling=false;
+function rollCourse(){
+  if(courseRolling) return;
+  courseRolling=true;
+  const btn=$("#rollCourse"); btn.disabled=true;
+  const out=$("#courseOut");
+  const spin=setInterval(()=>{
+    const it=COURSE[Math.floor(Math.random()*COURSE.length)];
+    out.innerHTML=`<div class="rolling"><span class="die">🎲</span><span class="rname">${it.em} ${it.name}</span></div>`;
+  },90);
+  setTimeout(()=>{
+    clearInterval(spin);
+    const n=3+Math.floor(Math.random()*2); // 3-4
+    renderCourse(pickMany(COURSE,n));
+    courseRolling=false; btn.disabled=false;
+  },1300);
+}
+
+/* ===== Bikurim generator (with count 1-5) ===== */
+let bikRolling=false;
 function rollBik(){
-  const b = BIKURIM[Math.floor(Math.random()*BIKURIM.length)];
-  $("#bikOut").innerHTML = `
-    <div class="bik">
-      <div class="big">${b.em}</div>
-      <div class="cat">${b.cat}</div>
-      <div class="arrow">↓ מביאים מהבית ↓</div>
-      <div class="bring">${b.bring}</div>
-      <div class="lvl">${b.lvl}</div>
-      <div class="tip">${b.tip}</div>
-    </div>`;
+  if(bikRolling) return;
+  bikRolling=true;
+  const btn=$("#rollBik"); btn.disabled=true;
+  const out=$("#bikOut");
+  const spin=setInterval(()=>{
+    const b=BIKURIM[Math.floor(Math.random()*BIKURIM.length)];
+    out.innerHTML=`<div class="rolling"><span class="die">🎲</span><span class="rname">${b.em} ${b.cat}</span></div>`;
+  },90);
+  setTimeout(()=>{
+    clearInterval(spin);
+    const b=BIKURIM[Math.floor(Math.random()*BIKURIM.length)];
+    const count=1+Math.floor(Math.random()*5); // 1-5
+    out.innerHTML=`
+      <div class="bik">
+        <div class="big">${b.em}</div>
+        <div class="cat">${b.cat}</div>
+        <div class="count">להביא <b>${count}</b></div>
+        <div class="arrow">↓ מביאים מהבית ↓</div>
+        <div class="bring">${b.bring}</div>
+        <div class="lvl">${b.lvl}</div>
+        <div class="tip">${b.tip}</div>
+      </div>`;
+    bikRolling=false; btn.disabled=false;
+  },1100);
 }
 
-$("#rollCourse").addEventListener("click", ()=>{ rollCourse(); });
-$("#rollBik").addEventListener("click", ()=>{ rollBik(); });
+$("#rollCourse").addEventListener("click", rollCourse);
+$("#rollBik").addEventListener("click", rollBik);
 
 /* ===== Timer ===== */
 let sec=0, tid=null;
