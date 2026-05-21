@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f1518">
+<title>מסע הביכורים · מושפיט</title>
+<meta name="description" content="משחק ביכורים לחג שבועות שמאתגר ומאזן את כל המשפחה. מחולל מסלול ומחולל ביכורים שמגרילים לכם משחק חדש בכל סבב.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Secular+One&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1518;
+    --bg-2:#161f24;
+    --card:#1b262c;
+    --teal:#2BBCB3;
+    --teal-soft:#2bbcb31a;
+    --orange:#F4A261;
+    --orange-soft:#f4a2611a;
+    --text:#eaf3f2;
+    --muted:#8fa6a3;
+    --line:#2a3a40;
+    --good:#37c98a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Heebo',sans-serif;
+    background:radial-gradient(1200px 600px at 80% -10%, #15252a 0%, var(--bg) 55%);
+    color:var(--text);
+    line-height:1.7;
+    font-size:18px;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:90px;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:560px;margin:0 auto;padding:0 20px}
+
+  /* ===== Header ===== */
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 8px;max-width:560px;margin:0 auto}
+  .brand{font-family:'Secular One';font-size:22px;color:var(--teal);letter-spacing:.5px}
+  .brand span{color:var(--orange)}
+  .chip{font-size:13px;font-weight:700;color:var(--orange);background:var(--orange-soft);border:1px solid #f4a26144;padding:5px 12px;border-radius:999px}
+
+  /* ===== Hero ===== */
+  .hero{padding:18px 0 6px;position:relative}
+  .hero .emoji{font-size:54px;line-height:1;filter:drop-shadow(0 6px 18px #000a)}
+  .hero h1{font-family:'Secular One';font-size:clamp(34px,9vw,46px);line-height:1.08;margin:10px 0 6px}
+  .hero h1 .hl{color:var(--teal)}
+  .hero p{color:var(--muted);font-size:17px;max-width:44ch}
+  .hero .ribbon{position:absolute;top:30px;left:-40px;width:160px;height:160px;background:radial-gradient(circle,var(--teal-soft),transparent 70%);pointer-events:none}
+
+  /* ===== Section ===== */
+  .sec{margin:30px 0}
+  .sec-h{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .sec-h .dot{width:9px;height:9px;border-radius:50%;background:var(--orange)}
+  .sec-h h2{font-family:'Secular One';font-size:23px}
+
+  /* ===== How to play (loop) ===== */
+  .loop{display:flex;flex-direction:column;gap:10px}
+  .loop .step{display:flex;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px}
+  .loop .step .n{font-family:'Secular One';font-size:17px;color:var(--teal);min-width:26px}
+  .loop .step b{font-weight:700}
+  .loop .step span{display:block;color:var(--muted);font-size:14px;margin-top:1px}
+
+  /* ===== Generators ===== */
+  .gen{background:linear-gradient(180deg,var(--bg-2),var(--card));border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:16px;position:relative;overflow:hidden}
+  .gen .tag{position:absolute;top:14px;inset-inline-start:16px;font-family:'Secular One';font-size:13px;color:#04181a;background:var(--orange);padding:3px 11px;border-radius:999px}
+  .gen.teal .tag{background:var(--teal)}
+  .gen .gh{font-family:'Secular One';font-size:21px;margin:6px 0 2px}
+  .gen .gp{color:var(--muted);font-size:14px;margin-bottom:14px}
+  .gen .roll{
+    width:100%;font-family:'Secular One';font-size:19px;color:#04181a;cursor:pointer;border:0;border-radius:14px;padding:15px;
+    background:linear-gradient(135deg,var(--orange),#e98b46);box-shadow:0 10px 26px #f4a26133;transition:.15s;
+  }
+  .gen.teal .roll{background:linear-gradient(135deg,var(--teal),#1fa79f);box-shadow:0 10px 26px #2bbcb333}
+  .gen .roll:active{transform:translateY(2px)}
+  .gen .out{margin-top:14px;min-height:8px}
+
+  /* result: course */
+  .course-grid{display:flex;flex-direction:column;gap:9px}
+  .course-grid .ci{display:flex;gap:12px;align-items:center;background:#0e171b;border:1px solid var(--line);border-radius:12px;padding:11px 13px;animation:pop .35s both}
+  .course-grid .ci .em{font-size:26px;flex-shrink:0}
+  .course-grid .ci b{font-weight:700;font-size:16px}
+  .course-grid .ci span{display:block;color:var(--muted);font-size:13px}
+  .course-grid .ci .ord{margin-inline-start:auto;font-family:'Secular One';color:var(--teal);font-size:15px}
+
+  /* result: bikurim */
+  .bik{background:#0e171b;border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;animation:pop .4s both}
+  .bik .big{font-size:46px;line-height:1}
+  .bik .cat{font-family:'Secular One';font-size:22px;margin:6px 0 2px}
+  .bik .arrow{color:var(--muted);font-size:14px;margin:4px 0}
+  .bik .bring{font-size:18px;font-weight:700;color:var(--teal)}
+  .bik .lvl{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--orange);background:var(--orange-soft);border:1px solid #f4a26133;padding:4px 12px;border-radius:999px}
+  .bik .tip{color:var(--muted);font-size:14px;margin-top:10px}
+
+  .placeholder{color:var(--muted);font-size:14px;text-align:center;padding:6px 4px;opacity:.7}
+
+  @keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+
+  /* ===== Starter card ===== */
+  .starter{background:linear-gradient(180deg,var(--teal-soft),transparent);border:1px solid #2bbcb333;border-radius:16px;padding:16px}
+  .starter h3{font-family:'Secular One';font-size:18px;color:var(--teal);margin-bottom:8px}
+  .starter ol{margin:0;padding-inline-start:20px}
+  .starter li{margin:7px 0;font-size:15px}
+
+  /* ===== Timer ===== */
+  .timer-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+  .timer-row{display:flex;align-items:center;gap:12px}
+  .timer-row .t{font-family:'Secular One';font-size:30px;letter-spacing:1px;min-width:96px;color:var(--text)}
+  .timer-row button{font-family:'Heebo';font-weight:700;font-size:15px;color:var(--text);background:var(--teal-soft);border:1px solid #2bbcb355;border-radius:12px;padding:11px 18px;cursor:pointer}
+  .timer-row button:active{transform:scale(.96)}
+  .timer-hint{color:var(--muted);font-size:13px;margin-top:10px}
+
+  /* ===== Accordion ===== */
+  .acc{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:10px;background:var(--card)}
+  .acc summary{list-style:none;cursor:pointer;padding:15px 16px;font-weight:700;display:flex;align-items:center;gap:10px;font-size:16px}
+  .acc summary::-webkit-details-marker{display:none}
+  .acc summary .arw{margin-inline-start:auto;transition:.3s;color:var(--muted)}
+  .acc[open] summary .arw{transform:rotate(180deg)}
+  .acc .in{padding:0 16px 16px;color:var(--muted);font-size:15px}
+  .acc .in li{margin:7px 0;list-style:none;display:flex;gap:8px}
+  .acc.danger{border-color:#f4a26144}
+  .acc.danger summary{color:var(--orange)}
+  .acc.danger .in li::before{content:"✅";flex-shrink:0}
+  .why{background:linear-gradient(180deg,var(--teal-soft),transparent);border:1px solid #2bbcb333;border-radius:14px;padding:16px;font-size:15px;color:#cfeae7;margin-top:14px}
+  .why b{color:var(--teal)}
+
+  /* ===== Celebrate ===== */
+  .finish{margin:30px 0 10px;text-align:center}
+  .finish button{
+    font-family:'Secular One';font-size:21px;color:#04181a;
+    background:linear-gradient(135deg,var(--teal),var(--orange));
+    border:0;border-radius:18px;padding:18px 26px;width:100%;cursor:pointer;
+    box-shadow:0 12px 30px #2bbcb333;transition:.2s;
+  }
+  .finish button:active{transform:translateY(2px)}
+
+  /* ===== Footer CTA ===== */
+  .foot{margin-top:34px;text-align:center;border-top:1px solid var(--line);padding-top:26px}
+  .foot p{color:var(--muted);font-size:15px;margin-bottom:14px}
+  .foot a.join{display:inline-flex;align-items:center;gap:8px;background:#25d36618;color:#36e07e;border:1px solid #25d36644;font-weight:700;text-decoration:none;padding:13px 22px;border-radius:14px;font-size:16px}
+  .sig{font-family:'Secular One';font-size:20px;margin-top:20px;color:var(--text)}
+
+  /* ===== Confetti + toast ===== */
+  #fx{position:fixed;inset:0;pointer-events:none;z-index:60}
+  .toast{position:fixed;inset-inline:0;bottom:24px;margin:auto;width:max-content;max-width:90%;background:var(--card);border:1px solid var(--teal);color:var(--text);padding:14px 20px;border-radius:14px;font-weight:700;box-shadow:0 14px 40px #000a;z-index:70;opacity:0;transform:translateY(20px);transition:.4s;text-align:center}
+  .toast.show{opacity:1;transform:translateY(0)}
+
+  @media(max-width:380px){body{font-size:17px}.hero h1{font-size:34px}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+
+<div class="topbar">
+  <div class="brand">מוש<span>פיט</span></div>
+  <div class="chip">🌾 חג שבועות</div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="ribbon"></div>
+    <div class="emoji">🧺</div>
+    <h1>מסע <span class="hl">הביכורים</span></h1>
+    <p>משחק ביכורים שמאתגר ומאזן את כל המשפחה. בונים מסלול, נושאים את הביכורים על הטנא, ומגיעים לפינת האיסוף בלי שיפלו. בכל סבב המחוללים מגרילים לכם משחק חדש.</p>
+  </header>
+
+  <!-- How to play -->
+  <section class="sec">
+    <div class="sec-h"><span class="dot"></span><h2>איך משחקים?</h2></div>
+    <div class="loop">
+      <div class="step"><span class="n">1</span><div><b>מגרילים מסלול</b><span>לוחצים על מחולל המסלול, ובונים יחד מסלול מהחפצים שיצאו.</span></div></div>
+      <div class="step"><span class="n">2</span><div><b>מגרילים ביכורים</b><span>לוחצים על מחולל הביכורים, והוא אומר מה לשאת היום.</span></div></div>
+      <div class="step"><span class="n">3</span><div><b>יוצאים למסע</b><span>כל אחד עם "טנא" (מגש או צלחת), מניחים עליו את הביכורים ועוברים את המסלול בלי להפיל.</span></div></div>
+      <div class="step"><span class="n">4</span><div><b>מגיעים לפינת האיסוף</b><span>מניחים את הביכורים, ומגרילים סבב חדש עם מסלול וביכורים אחרים.</span></div></div>
+    </div>
+  </section>
+
+  <!-- Generators -->
+  <section class="sec">
+    <div class="sec-h"><span class="dot"></span><h2>בוחרים את המשחק</h2></div>
+
+    <div class="gen teal">
+      <div class="tag">שלב 1</div>
+      <div class="gh">🗺️ מחולל המסלול</div>
+      <div class="gp">לחיצה מגרילה את החפצים שמהם בונים את המסלול בסלון.</div>
+      <button class="roll" id="rollCourse">🎲 הגרילו מסלול</button>
+      <div class="out" id="courseOut"><div class="placeholder">לחצו כדי לקבל מסלול</div></div>
+    </div>
+
+    <div class="gen">
+      <div class="tag">שלב 2</div>
+      <div class="gh">🧺 מחולל הביכורים</div>
+      <div class="gp">לחיצה מכריזה אילו ביכורים נושאים היום, ומה מהבית מחליף אותם.</div>
+      <button class="roll" id="rollBik">🧺 איזה ביכורים?</button>
+      <div class="out" id="bikOut"><div class="placeholder">לחצו כדי לקבל ביכורים</div></div>
+    </div>
+  </section>
+
+  <!-- Starter / progression -->
+  <section class="sec">
+    <div class="sec-h"><span class="dot"></span><h2>פעם ראשונה? ככה פותחים</h2></div>
+    <div class="starter">
+      <h3>קודם הצלחה, אחר כך מזל</h3>
+      <ol>
+        <li>במיוחד עם הקטנטנים, בנו מסלול קצר וקל והניחו על הטנא ביכורים <b>יציבים</b> (לגו, קוביות, ספר).</li>
+        <li>אחרי שחווים הצלחה ומגיעים לפינת האיסוף בלי להפיל, מפעילים את <b>המזל</b> של המחוללים.</li>
+        <li>וכשזה כבר זורם, מוסיפים את <b>השעון</b> ומנסים לשבור שיא.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Timer -->
+  <section class="sec">
+    <div class="sec-h"><span class="dot"></span><h2>אתגר השעון</h2></div>
+    <div class="timer-card">
+      <div class="timer-row">
+        <span class="t" id="clock">00:00</span>
+        <button id="timerBtn">▶ התחילו</button>
+        <button id="resetBtn">איפוס</button>
+      </div>
+      <div class="timer-hint">כמה זמן לוקח להעביר את כל הביכורים לפינת האיסוף? נסו לשבור את השיא בסבב הבא.</div>
+    </div>
+  </section>
+
+  <!-- Celebrate -->
+  <div class="finish">
+    <button id="finishBtn">🎉 הגענו לפינת האיסוף!</button>
+  </div>
+
+  <!-- Safety -->
+  <details class="acc danger" open>
+    <summary>⚠️ בטיחות <span class="arw">▾</span></summary>
+    <div class="in">
+      <ul style="padding:0;margin:0">
+        <li>על הטנא רק חפצים קלים ורכים, בלי דברים כבדים או שבירים שעלולים ליפול על כף הרגל.</li>
+        <li>חפצי המסלול יציבים. מטפסים רק על משטח נמוך ובטוח, בלי להעמיד דברים גבוהים ורעועים.</li>
+        <li>נושאים את הטנא בקצב מבוקר, בלי ריצה פראית בסלון.</li>
+        <li>שטח פנוי, רחוק ממדרגות ומפינות חדות, וליווי צמוד לקטנטנים.</li>
+      </ul>
+    </div>
+  </details>
+
+  <!-- Why it works -->
+  <div class="why">
+    <b>למה זה עובד?</b> נשיאת הביכורים ובניית המסלול הן "עבודה כבדה" שמפעילה את חוש תחושת-הגוף ועוזרת לילד.ה מתפרע.ת לחזור לאיזון. הטנא מוסיף שיווי משקל דינמי, וההגרלה בכל סבב מאלצת את הילד.ה לתכנן מסלול חדש, אז גם הראש עובד, לא רק הגוף.
+  </div>
+
+  <!-- Footer -->
+  <footer class="foot">
+    <p>רוצים עוד רעיונות כאלה?<br>הצטרפו לקבוצת הוואטסאפ של מושפיט - משפחה בתנועה</p>
+    <a class="join" href="https://chat.whatsapp.com/Jg2uU0inKjW58xVdXc2RAE" target="_blank" rel="noopener">💚 ממש כאן, להצטרפות</a>
+    <div class="sig">שיהיה חג שמח ומלא תנועה ❤️ מוש</div>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+
+/* ===== Data ===== */
+const COURSE = [
+  {em:"🪑", name:"כסא",            act:"לזחול מתחתיו"},
+  {em:"🛋️", name:"ספה",            act:"לטפס ולרדת"},
+  {em:"🧺", name:"סל כביסה",        act:"להקיף סביבו"},
+  {em:"🧣", name:"מגבת או צעיף",    act:"לפסוע מעל ה'נחל'"},
+  {em:"🪢", name:"חגורה או חבל",    act:"קו שיווי משקל ללכת עליו"},
+  {em:"🛏️", name:"ערימת כריות",    act:"'הר' לטפס עליו"},
+  {em:"📦", name:"קופסה",           act:"לעבור מעליה בזהירות"},
+  {em:"🧹", name:"מקל מטאטא",       act:"לעבור מתחת, לימבו"},
+  {em:"🪜", name:"שרפרף",           act:"לעקוף בזהירות"},
+  {em:"🚪", name:"מסגרת דלת",       act:"לעבור דרכה בלי לגעת"}
+];
+
+const BIKURIM = [
+  {em:"🍎", cat:"פירות עגולים",  bring:"כדורים שונים",            lvl:"מתגלגל · אתגר איזון", tip:"מתגלגלים בקלות, צריך טנא יציב ויד רגועה."},
+  {em:"🥕", cat:"ירקות",         bring:"אבני לגו או קוביות",       lvl:"יציב · קל יותר",      tip:"מצוין לפעם הראשונה ולקטנטנים."},
+  {em:"📚", cat:"ספרים",         bring:"שניים-שלושה ספרים",        lvl:"שטוח · בינוני",       tip:"אפשר לערום, נופל אם ממהרים."},
+  {em:"🍇", cat:"אשכול ענבים",   bring:"חופן כדורים קטנים יחד",    lvl:"מתפזר · מאתגר",       tip:"הכל יחד על הטנא, בלי לאבד באמצע."},
+  {em:"🌽", cat:"שיבולים ותירס", bring:"בקבוקים ריקים או מקלות",   lvl:"מתגלגל לרוחב",        tip:"שמים לאורך הטנא כדי שלא יתגלגלו."},
+  {em:"🧀", cat:"מאכלי חלב",     bring:"קופסאות או חפצים מרובעים", lvl:"יציב · קל",           tip:"שבועות הוא חג מאכלי החלב, מתאים במיוחד."},
+  {em:"🥚", cat:"ביצים",         bring:"כדורי משחק עדינים",        lvl:"עדין · בזהירות",      tip:"נושאים 'בלי לשבור', תנועה רכה ואיטית."}
+];
+
+/* ===== Generators ===== */
+function pickMany(arr, n){
+  const c=[...arr], out=[];
+  for(let i=0;i<n && c.length;i++){ out.push(c.splice(Math.floor(Math.random()*c.length),1)[0]); }
+  return out;
+}
+
+function rollCourse(){
+  const n = 3 + Math.floor(Math.random()*2); // 3-4
+  const items = pickMany(COURSE, n);
+  $("#courseOut").innerHTML =
+    '<div class="course-grid">' +
+    items.map((it,i)=>`
+      <div class="ci" style="animation-delay:${i*70}ms">
+        <span class="em">${it.em}</span>
+        <div><b>${it.name}</b><span>${it.act}</span></div>
+        <span class="ord">${i+1}</span>
+      </div>`).join("") +
+    '</div>';
+}
+
+function rollBik(){
+  const b = BIKURIM[Math.floor(Math.random()*BIKURIM.length)];
+  $("#bikOut").innerHTML = `
+    <div class="bik">
+      <div class="big">${b.em}</div>
+      <div class="cat">${b.cat}</div>
+      <div class="arrow">↓ מביאים מהבית ↓</div>
+      <div class="bring">${b.bring}</div>
+      <div class="lvl">${b.lvl}</div>
+      <div class="tip">${b.tip}</div>
+    </div>`;
+}
+
+$("#rollCourse").addEventListener("click", ()=>{ rollCourse(); });
+$("#rollBik").addEventListener("click", ()=>{ rollBik(); });
+
+/* ===== Timer ===== */
+let sec=0, tid=null;
+const clock=$("#clock"), tbtn=$("#timerBtn");
+const fmt = s => String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+tbtn.addEventListener("click", ()=>{
+  if(tid){ clearInterval(tid); tid=null; tbtn.textContent="▶ המשך"; }
+  else { tid=setInterval(()=>{sec++;clock.textContent=fmt(sec)},1000); tbtn.textContent="⏸ עצרו"; }
+});
+$("#resetBtn").addEventListener("click", ()=>{
+  clearInterval(tid); tid=null; sec=0; clock.textContent="00:00"; tbtn.textContent="▶ התחילו";
+});
+
+/* ===== Finish ===== */
+$("#finishBtn").addEventListener("click", ()=>{
+  if(tid){clearInterval(tid);tid=null;tbtn.textContent="▶ התחילו";}
+  burst();
+  const msg = sec>0 ? `הגעתם לפינת האיסוף ב-${fmt(sec)} 🌾` : "הגעתם לפינת האיסוף! חג שמח 🌾";
+  showToast(msg);
+});
+
+function showToast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3500);}
+
+/* ===== Confetti ===== */
+const cv=$("#fx"), ctx=cv.getContext("2d");
+function size(){cv.width=innerWidth;cv.height=innerHeight}
+size(); addEventListener("resize",size);
+let parts=[], raf=null;
+function burst(){
+  const cols=["#2BBCB3","#F4A261","#37c98a","#eaf3f2"];
+  for(let i=0;i<140;i++){
+    parts.push({x:innerWidth/2,y:innerHeight*0.35,vx:(Math.random()-.5)*9,vy:Math.random()*-11-3,
+      g:.28,s:Math.random()*7+4,c:cols[i%cols.length],r:Math.random()*6,vr:(Math.random()-.5)*.4,life:1});
+  }
+  if(!raf) loop();
+}
+function loop(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(p=>{p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.life-=.008;
+    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.globalAlpha=Math.max(p.life,0);
+    ctx.fillStyle=p.c;ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);ctx.restore();});
+  parts=parts.filter(p=>p.life>0 && p.y<cv.height+40);
+  if(parts.length){raf=requestAnimationFrame(loop)} else {raf=null;ctx.clearRect(0,0,cv.width,cv.height)}
+}
+</script>
+</body>
+</html>
