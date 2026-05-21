@@ -3,185 +3,184 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0f1518">
+<meta name="theme-color" content="#F7F5F0">
 <title>מסע הביכורים · מושפיט</title>
 <meta name="description" content="משחק ביכורים לחג שבועות שמאתגר ומאזן את כל המשפחה. מחולל מסלול ומחולל ביכורים שמגרילים לכם משחק חדש בכל סבב.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Secular+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=Rubik:wght@500;700;800&family=Secular+One&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0f1518;
-    --bg-2:#161f24;
-    --card:#1b262c;
-    --teal:#2BBCB3;
-    --teal-soft:#2bbcb31a;
-    --orange:#F4A261;
-    --orange-soft:#f4a2611a;
-    --text:#eaf3f2;
-    --muted:#8fa6a3;
-    --line:#2a3a40;
-    --good:#37c98a;
+    --cream:#F7F5F0;      /* רקע */
+    --cream-2:#FBF9F4;    /* כרטיסים, לבן חם */
+    --ink:#2B2B2B;        /* טקסט */
+    --teal:#1A6B5A;       /* טורקיז מושפיט, ראשי */
+    --teal-bright:#29B6C8;/* טורקיז הקמע, שובב */
+    --teal-soft:#1a6b5a14;
+    --pink:#F4A89D;       /* accent חם */
+    --yellow:#F5D27A;     /* accent חמים */
+    --muted:#6E7B77;      /* טקסט משני */
+    --line:#E7E1D6;       /* גבולות */
+    --good:#3E9C7B;
+    --shadow:0 8px 26px rgba(43,43,43,.08);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
     font-family:'Heebo',sans-serif;
-    background:radial-gradient(1200px 600px at 80% -10%, #15252a 0%, var(--bg) 55%);
-    color:var(--text);
-    line-height:1.7;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.65;
     font-size:18px;
     -webkit-font-smoothing:antialiased;
-    padding-bottom:90px;
+    padding-bottom:80px;
     overflow-x:hidden;
   }
-  .wrap{max-width:560px;margin:0 auto;padding:0 20px}
+  .wrap{max-width:540px;margin:0 auto;padding:0 20px}
 
   /* ===== Header ===== */
-  .topbar{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 8px;max-width:560px;margin:0 auto}
-  .brand{font-family:'Secular One';font-size:22px;color:var(--teal);letter-spacing:.5px}
-  .brand span{color:var(--orange)}
-  .chip{font-size:13px;font-weight:700;color:var(--orange);background:var(--orange-soft);border:1px solid #f4a26144;padding:5px 12px;border-radius:999px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px 6px;max-width:540px;margin:0 auto}
+  .topbar img.logo{width:148px;height:auto;display:block}
+  .chip{font-family:'Rubik';font-size:13px;font-weight:700;color:#8a6d12;background:var(--yellow);padding:6px 13px;border-radius:999px;white-space:nowrap;box-shadow:0 3px 10px #f5d27a55}
 
   /* ===== Hero ===== */
-  .hero{padding:18px 0 6px;position:relative}
-  .hero .emoji{font-size:54px;line-height:1;filter:drop-shadow(0 6px 18px #000a)}
-  .hero h1{font-family:'Secular One';font-size:clamp(34px,9vw,46px);line-height:1.08;margin:10px 0 6px}
-  .hero h1 .hl{color:var(--teal)}
-  .hero p{color:var(--muted);font-size:17px;max-width:44ch}
-  .hero .ribbon{position:absolute;top:30px;left:-40px;width:160px;height:160px;background:radial-gradient(circle,var(--teal-soft),transparent 70%);pointer-events:none}
+  .hero{text-align:center;padding:10px 0 4px;position:relative}
+  .hero .mascot-wrap{position:relative;width:160px;height:160px;margin:0 auto 4px}
+  .hero .mascot-wrap::before{content:"";position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#fff 0%,#eef4f1 70%,transparent 72%)}
+  .hero .mascot{position:relative;width:160px;height:160px;object-fit:contain;mix-blend-mode:multiply;filter:drop-shadow(0 10px 14px rgba(26,107,90,.18))}
+  .hero h1{font-family:'Rubik';font-weight:800;font-size:clamp(34px,9.5vw,46px);line-height:1.05;color:var(--teal);margin:6px 0 8px}
+  .hero h1 .em{font-size:.7em}
+  .hero p{color:var(--muted);font-size:17px;max-width:40ch;margin:0 auto}
+  .hero p b{color:var(--ink)}
 
   /* ===== Section ===== */
-  .sec{margin:30px 0}
-  .sec-h{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-  .sec-h .dot{width:9px;height:9px;border-radius:50%;background:var(--orange)}
-  .sec-h h2{font-family:'Secular One';font-size:23px}
+  .sec{margin:28px 0}
+  .sec-h{display:flex;align-items:center;gap:9px;margin-bottom:13px}
+  .sec-h .bar{width:22px;height:5px;border-radius:99px;background:var(--teal-bright)}
+  .sec-h h2{font-family:'Rubik';font-weight:800;font-size:22px;color:var(--teal)}
 
-  /* ===== How to play (loop) ===== */
+  /* ===== How to play ===== */
   .loop{display:flex;flex-direction:column;gap:10px}
-  .loop .step{display:flex;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px}
-  .loop .step .n{font-family:'Secular One';font-size:17px;color:var(--teal);min-width:26px}
+  .loop .step{display:flex;gap:13px;background:var(--cream-2);border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}
+  .loop .step .n{font-family:'Rubik';font-weight:800;font-size:17px;color:#fff;background:var(--teal-bright);min-width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
   .loop .step b{font-weight:700}
-  .loop .step span{display:block;color:var(--muted);font-size:14px;margin-top:1px}
+  .loop .step span{display:block;color:var(--muted);font-size:14.5px;margin-top:1px}
 
   /* ===== Generators ===== */
-  .gen{background:linear-gradient(180deg,var(--bg-2),var(--card));border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:16px;position:relative;overflow:hidden}
-  .gen .tag{position:absolute;top:14px;inset-inline-start:16px;font-family:'Secular One';font-size:13px;color:#04181a;background:var(--orange);padding:3px 11px;border-radius:999px}
-  .gen.teal .tag{background:var(--teal)}
-  .gen .gh{font-family:'Secular One';font-size:21px;margin:6px 0 2px}
-  .gen .gp{color:var(--muted);font-size:14px;margin-bottom:14px}
+  .gen{background:var(--cream-2);border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:15px;box-shadow:var(--shadow);position:relative}
+  .gen .tag{display:inline-block;font-family:'Rubik';font-weight:700;font-size:12px;color:var(--teal);background:var(--teal-soft);padding:4px 12px;border-radius:999px;margin-bottom:8px}
+  .gen .gh{font-family:'Rubik';font-weight:800;font-size:20px;color:var(--ink)}
+  .gen .gp{color:var(--muted);font-size:14px;margin:2px 0 14px}
   .gen .roll{
-    width:100%;font-family:'Secular One';font-size:19px;color:#04181a;cursor:pointer;border:0;border-radius:14px;padding:15px;
-    background:linear-gradient(135deg,var(--orange),#e98b46);box-shadow:0 10px 26px #f4a26133;transition:.15s;
+    width:100%;font-family:'Rubik';font-weight:800;font-size:19px;color:#fff;cursor:pointer;border:0;border-radius:15px;padding:15px;
+    background:var(--teal-bright);box-shadow:0 8px 20px #29b6c83d;transition:.15s;
   }
-  .gen.teal .roll{background:linear-gradient(135deg,var(--teal),#1fa79f);box-shadow:0 10px 26px #2bbcb333}
   .gen .roll:active{transform:translateY(2px)}
-  .gen .roll:disabled{filter:grayscale(.3) brightness(.92);cursor:default}
+  .gen .roll:disabled{opacity:.7;cursor:default}
   .gen .out{margin-top:14px;min-height:8px}
 
   /* rolling suspense */
-  .rolling{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 8px}
-  .rolling .die{font-size:50px;display:inline-block;animation:tumble .45s linear infinite}
-  .rolling .rname{font-size:19px;font-weight:700;color:var(--muted);min-height:24px}
+  .rolling{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 8px}
+  .rolling .die{font-size:48px;display:inline-block;animation:tumble .45s linear infinite}
+  .rolling .rname{font-family:'Rubik';font-weight:700;font-size:19px;color:var(--muted);min-height:24px}
   @keyframes tumble{0%{transform:rotate(0) scale(1)}50%{transform:rotate(180deg) scale(1.18)}100%{transform:rotate(360deg) scale(1)}}
 
-  /* result: course (object only, room for creativity) */
+  /* result: course */
   .course-grid{display:flex;flex-direction:column;gap:9px}
-  .course-grid .ci{display:flex;gap:13px;align-items:center;background:#0e171b;border:1px solid var(--line);border-radius:12px;padding:13px 15px;animation:pop .35s both}
+  .course-grid .ci{display:flex;gap:13px;align-items:center;background:var(--cream);border:1px solid var(--line);border-radius:13px;padding:12px 14px;animation:pop .35s both}
   .course-grid .ci .em{font-size:28px;flex-shrink:0}
-  .course-grid .ci b{font-weight:700;font-size:18px}
-  .course-grid .ci .ord{margin-inline-start:auto;font-family:'Secular One';color:var(--teal);font-size:16px}
+  .course-grid .ci b{font-family:'Rubik';font-weight:700;font-size:18px}
+  .course-grid .ci .ord{margin-inline-start:auto;font-family:'Rubik';font-weight:800;color:var(--teal-bright);font-size:16px}
   .course-note{color:var(--muted);font-size:13px;text-align:center;margin-top:10px}
 
   /* result: bikurim */
-  .bik{background:#0e171b;border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;animation:pop .4s both}
+  .bik{background:var(--cream);border:1px solid var(--line);border-radius:15px;padding:18px;text-align:center;animation:pop .4s both}
   .bik .big{font-size:46px;line-height:1}
-  .bik .cat{font-family:'Secular One';font-size:22px;margin:6px 0 2px}
-  .bik .count{font-size:16px;color:var(--text);margin-top:4px}
-  .bik .count b{font-family:'Secular One';color:var(--orange);font-size:26px;padding:0 5px}
-  .bik .arrow{color:var(--muted);font-size:14px;margin:6px 0 2px}
-  .bik .bring{font-size:18px;font-weight:700;color:var(--teal)}
-  .bik .lvl{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--orange);background:var(--orange-soft);border:1px solid #f4a26133;padding:4px 12px;border-radius:999px}
+  .bik .cat{font-family:'Rubik';font-weight:800;font-size:22px;color:var(--ink);margin:6px 0 2px}
+  .bik .count{font-size:16px;color:var(--ink);margin-top:4px}
+  .bik .count b{font-family:'Rubik';font-weight:800;color:#cf7c2e;font-size:26px;padding:0 5px}
+  .bik .arrow{color:var(--muted);font-size:13px;margin:7px 0 2px}
+  .bik .bring{font-family:'Rubik';font-weight:700;font-size:18px;color:var(--teal)}
+  .bik .lvl{display:inline-block;margin-top:11px;font-family:'Rubik';font-size:13px;font-weight:700;color:#a06a2a;background:#f5d27a3a;padding:5px 13px;border-radius:999px}
   .bik .tip{color:var(--muted);font-size:14px;margin-top:10px}
 
-  .placeholder{color:var(--muted);font-size:14px;text-align:center;padding:6px 4px;opacity:.7}
+  .placeholder{color:var(--muted);font-size:14px;text-align:center;padding:6px 4px}
 
   @keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
 
   /* ===== Starter card ===== */
-  .starter{background:linear-gradient(180deg,var(--teal-soft),transparent);border:1px solid #2bbcb333;border-radius:16px;padding:16px}
-  .starter h3{font-family:'Secular One';font-size:18px;color:var(--teal);margin-bottom:8px}
+  .starter{background:linear-gradient(180deg,var(--teal-soft),transparent);border:1px solid #1a6b5a26;border-radius:18px;padding:17px}
+  .starter h3{font-family:'Rubik';font-weight:800;font-size:18px;color:var(--teal);margin-bottom:8px}
   .starter ol{margin:0;padding-inline-start:20px}
-  .starter li{margin:7px 0;font-size:15px}
+  .starter li{margin:8px 0;font-size:15px}
+  .starter li b{color:var(--teal)}
 
   /* ===== Timer ===== */
-  .timer-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+  .timer-card{background:var(--cream-2);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
   .timer-row{display:flex;align-items:center;gap:12px}
-  .timer-row .t{font-family:'Secular One';font-size:30px;letter-spacing:1px;min-width:96px;color:var(--text)}
-  .timer-row button{font-family:'Heebo';font-weight:700;font-size:15px;color:var(--text);background:var(--teal-soft);border:1px solid #2bbcb355;border-radius:12px;padding:11px 18px;cursor:pointer}
+  .timer-row .t{font-family:'Rubik';font-weight:800;font-size:30px;letter-spacing:1px;min-width:96px;color:var(--teal)}
+  .timer-row button{font-family:'Rubik';font-weight:700;font-size:15px;color:var(--teal);background:var(--teal-soft);border:1px solid #1a6b5a30;border-radius:12px;padding:11px 18px;cursor:pointer}
   .timer-row button:active{transform:scale(.96)}
   .timer-hint{color:var(--muted);font-size:13px;margin-top:10px}
 
   /* ===== Accordion ===== */
-  .acc{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:10px;background:var(--card)}
-  .acc summary{list-style:none;cursor:pointer;padding:15px 16px;font-weight:700;display:flex;align-items:center;gap:10px;font-size:16px}
+  .acc{border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:11px;background:var(--cream-2);box-shadow:var(--shadow)}
+  .acc summary{list-style:none;cursor:pointer;padding:15px 16px;font-family:'Rubik';font-weight:700;display:flex;align-items:center;gap:10px;font-size:16px;color:var(--ink)}
   .acc summary::-webkit-details-marker{display:none}
   .acc summary .arw{margin-inline-start:auto;transition:.3s;color:var(--muted)}
   .acc[open] summary .arw{transform:rotate(180deg)}
   .acc .in{padding:0 16px 16px;color:var(--muted);font-size:15px}
   .acc .in li{margin:7px 0;list-style:none;display:flex;gap:8px}
-  .acc.danger{border-color:#f4a26144}
-  .acc.danger summary{color:var(--orange)}
-  .acc.danger .in li::before{content:"✅";flex-shrink:0}
+  .acc.safe summary{color:#a35b2e}
+  .acc.safe .in li::before{content:"✔";color:var(--good);flex-shrink:0;font-weight:800}
   .acc .in p{margin:8px 0}
-  .acc .in p b{color:var(--text)}
-  .why{background:linear-gradient(180deg,var(--teal-soft),transparent);border:1px solid #2bbcb333;border-radius:14px;padding:16px;font-size:15px;color:#cfeae7;margin-top:14px}
-  .why b{color:var(--teal)}
+  .acc .in p b{color:var(--ink)}
+  .why{background:linear-gradient(180deg,#fbeede,transparent);border:1px solid #f5d27a55;border-radius:16px;padding:17px;font-size:15px;color:#5c4a2a;margin-top:14px}
+  .why b{color:#a06a2a;font-family:'Rubik';font-weight:700}
 
   /* ===== Celebrate ===== */
-  .finish{margin:30px 0 10px;text-align:center}
+  .finish{margin:28px 0 10px;text-align:center}
   .finish button{
-    font-family:'Secular One';font-size:21px;color:#04181a;
-    background:linear-gradient(135deg,var(--teal),var(--orange));
-    border:0;border-radius:18px;padding:18px 26px;width:100%;cursor:pointer;
-    box-shadow:0 12px 30px #2bbcb333;transition:.2s;
+    font-family:'Rubik';font-weight:800;font-size:21px;color:#fff;
+    background:var(--teal);border:0;border-radius:18px;padding:18px 26px;width:100%;cursor:pointer;
+    box-shadow:0 10px 26px #1a6b5a3a;transition:.2s;
   }
   .finish button:active{transform:translateY(2px)}
 
   /* ===== Footer CTA ===== */
-  .foot{margin-top:34px;text-align:center;border-top:1px solid var(--line);padding-top:26px}
+  .foot{margin-top:32px;text-align:center;border-top:1px solid var(--line);padding-top:24px}
+  .foot .mini-mascot{width:62px;height:62px;object-fit:contain;mix-blend-mode:multiply;margin-bottom:4px}
   .foot p{color:var(--muted);font-size:15px;margin-bottom:14px}
-  .foot a.join{display:inline-flex;align-items:center;gap:8px;background:#25d36618;color:#36e07e;border:1px solid #25d36644;font-weight:700;text-decoration:none;padding:13px 22px;border-radius:14px;font-size:16px}
-  .sig{font-family:'Secular One';font-size:20px;margin-top:20px;color:var(--text)}
+  .foot a.join{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-family:'Rubik';font-weight:700;text-decoration:none;padding:13px 24px;border-radius:14px;font-size:16px;box-shadow:0 8px 20px #25d3663a}
+  .sig{font-family:'Secular One';font-size:19px;margin-top:18px;color:var(--teal)}
 
   /* ===== Confetti + toast ===== */
   #fx{position:fixed;inset:0;pointer-events:none;z-index:60}
-  .toast{position:fixed;inset-inline:0;bottom:24px;margin:auto;width:max-content;max-width:90%;background:var(--card);border:1px solid var(--teal);color:var(--text);padding:14px 20px;border-radius:14px;font-weight:700;box-shadow:0 14px 40px #000a;z-index:70;opacity:0;transform:translateY(20px);transition:.4s;text-align:center}
+  .toast{position:fixed;inset-inline:0;bottom:24px;margin:auto;width:max-content;max-width:90%;background:var(--teal);border:0;color:#fff;font-family:'Rubik';font-weight:700;padding:14px 22px;border-radius:14px;box-shadow:0 14px 36px rgba(26,107,90,.4);z-index:70;opacity:0;transform:translateY(20px);transition:.4s;text-align:center}
   .toast.show{opacity:1;transform:translateY(0)}
 
-  @media(max-width:380px){body{font-size:17px}.hero h1{font-size:34px}}
+  @media(max-width:380px){body{font-size:17px}.hero h1{font-size:34px}.topbar img.logo{width:130px}}
 </style>
 </head>
 <body>
 <canvas id="fx"></canvas>
 
 <div class="topbar">
-  <div class="brand">מוש<span>פיט</span></div>
-  <div class="chip">🌾 חג שבועות</div>
+  <img class="logo" src="logo.png" alt="מושפיט">
+  <span class="chip">🌾 חג שבועות</span>
 </div>
 
 <div class="wrap">
 
   <header class="hero">
-    <div class="ribbon"></div>
-    <div class="emoji">🧺</div>
-    <h1>מסע <span class="hl">הביכורים</span></h1>
-    <p>משחק ביכורים שמאתגר ומאזן את כל המשפחה. בונים מסלול, נושאים את הביכורים על הטנא, ומגיעים לפינת האיסוף בלי שיפלו. בכל סבב המחוללים מגרילים לכם משחק חדש.</p>
+    <div class="mascot-wrap"><img class="mascot" src="moshpiter.jpg" alt="המושפיטר"></div>
+    <h1>מסע <span class="em">ה</span>ביכורים</h1>
+    <p>משחק ביכורים שמאתגר ומאזן את כל המשפחה. בונים מסלול, נושאים את הביכורים על הטנא, ומגיעים לפינת האיסוף בלי שיפלו. <b>בכל סבב המחוללים מגרילים לכם משחק חדש.</b></p>
   </header>
 
   <!-- How to play -->
   <section class="sec">
-    <div class="sec-h"><span class="dot"></span><h2>איך משחקים?</h2></div>
+    <div class="sec-h"><span class="bar"></span><h2>איך משחקים?</h2></div>
     <div class="loop">
       <div class="step"><span class="n">1</span><div><b>מגרילים מסלול</b><span>לוחצים על מחולל המסלול, ובונים מהחפצים שיצאו מסלול, איך שבא לכם. אתם ממציאים מה עושים עם כל חפץ.</span></div></div>
       <div class="step"><span class="n">2</span><div><b>מגרילים ביכורים</b><span>לוחצים על מחולל הביכורים, והוא אומר מה לשאת היום, וכמה.</span></div></div>
@@ -192,10 +191,10 @@
 
   <!-- Generators -->
   <section class="sec">
-    <div class="sec-h"><span class="dot"></span><h2>בוחרים את המשחק</h2></div>
+    <div class="sec-h"><span class="bar"></span><h2>בוחרים את המשחק</h2></div>
 
-    <div class="gen teal">
-      <div class="tag">שלב 1</div>
+    <div class="gen">
+      <span class="tag">שלב 1</span>
       <div class="gh">🗺️ מחולל המסלול</div>
       <div class="gp">לחיצה מגרילה את החפצים שמהם בונים את המסלול בסלון.</div>
       <button class="roll" id="rollCourse">🎲 הגרילו מסלול</button>
@@ -203,7 +202,7 @@
     </div>
 
     <div class="gen">
-      <div class="tag">שלב 2</div>
+      <span class="tag">שלב 2</span>
       <div class="gh">🧺 מחולל הביכורים</div>
       <div class="gp">לחיצה מכריזה אילו ביכורים נושאים היום, כמה, ומה מהבית מחליף אותם.</div>
       <button class="roll" id="rollBik">🎲 איזה ביכורים?</button>
@@ -213,7 +212,7 @@
 
   <!-- Starter / progression -->
   <section class="sec">
-    <div class="sec-h"><span class="dot"></span><h2>פעם ראשונה? ככה פותחים</h2></div>
+    <div class="sec-h"><span class="bar"></span><h2>פעם ראשונה? ככה פותחים</h2></div>
     <div class="starter">
       <h3>קודם הצלחה, אחר כך מזל</h3>
       <ol>
@@ -226,7 +225,7 @@
 
   <!-- Timer -->
   <section class="sec">
-    <div class="sec-h"><span class="dot"></span><h2>אתגר השעון</h2></div>
+    <div class="sec-h"><span class="bar"></span><h2>אתגר השעון</h2></div>
     <div class="timer-card">
       <div class="timer-row">
         <span class="t" id="clock">00:00</span>
@@ -243,7 +242,7 @@
   </div>
 
   <!-- Safety -->
-  <details class="acc danger" open>
+  <details class="acc safe" open>
     <summary>⚠️ בטיחות <span class="arw">▾</span></summary>
     <div class="in">
       <ul style="padding:0;margin:0">
@@ -271,6 +270,7 @@
 
   <!-- Footer -->
   <footer class="foot">
+    <img class="mini-mascot" src="moshpiter.jpg" alt="">
     <p>רוצים עוד רעיונות כאלה?<br>הצטרפו לקבוצת הוואטסאפ של מושפיט - משפחה בתנועה</p>
     <a class="join" href="https://chat.whatsapp.com/Jg2uU0inKjW58xVdXc2RAE" target="_blank" rel="noopener">💚 ממש כאן, להצטרפות</a>
     <div class="sig">שיהיה חג שמח ומלא תנועה ❤️ מוש</div>
@@ -313,7 +313,7 @@ function pickMany(arr, n){
   return out;
 }
 
-/* ===== Course generator (with rolling suspense) ===== */
+/* ===== Course generator (rolling suspense) ===== */
 function renderCourse(items){
   $("#courseOut").innerHTML =
     '<div class="course-grid">' +
@@ -325,7 +325,6 @@ function renderCourse(items){
       </div>`).join("") +
     '</div><div class="course-note">בונים מאלה מסלול, איך שבא לכם. אין כללים קבועים.</div>';
 }
-
 let courseRolling=false;
 function rollCourse(){
   if(courseRolling) return;
@@ -338,13 +337,13 @@ function rollCourse(){
   },90);
   setTimeout(()=>{
     clearInterval(spin);
-    const n=3+Math.floor(Math.random()*2); // 3-4
+    const n=3+Math.floor(Math.random()*2);
     renderCourse(pickMany(COURSE,n));
     courseRolling=false; btn.disabled=false;
   },1300);
 }
 
-/* ===== Bikurim generator (with count 1-5) ===== */
+/* ===== Bikurim generator (count 1-5) ===== */
 let bikRolling=false;
 function rollBik(){
   if(bikRolling) return;
@@ -358,7 +357,7 @@ function rollBik(){
   setTimeout(()=>{
     clearInterval(spin);
     const b=BIKURIM[Math.floor(Math.random()*BIKURIM.length)];
-    const count=1+Math.floor(Math.random()*5); // 1-5
+    const count=1+Math.floor(Math.random()*5);
     out.innerHTML=`
       <div class="bik">
         <div class="big">${b.em}</div>
@@ -395,16 +394,15 @@ $("#finishBtn").addEventListener("click", ()=>{
   const msg = sec>0 ? `הגעתם לפינת האיסוף ב-${fmt(sec)} 🌾` : "הגעתם לפינת האיסוף! חג שמח 🌾";
   showToast(msg);
 });
-
 function showToast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3500);}
 
-/* ===== Confetti ===== */
+/* ===== Confetti (brand colors) ===== */
 const cv=$("#fx"), ctx=cv.getContext("2d");
 function size(){cv.width=innerWidth;cv.height=innerHeight}
 size(); addEventListener("resize",size);
 let parts=[], raf=null;
 function burst(){
-  const cols=["#2BBCB3","#F4A261","#37c98a","#eaf3f2"];
+  const cols=["#29B6C8","#F5D27A","#F4A89D","#1A6B5A"];
   for(let i=0;i<140;i++){
     parts.push({x:innerWidth/2,y:innerHeight*0.35,vx:(Math.random()-.5)*9,vy:Math.random()*-11-3,
       g:.28,s:Math.random()*7+4,c:cols[i%cols.length],r:Math.random()*6,vr:(Math.random()-.5)*.4,life:1});
